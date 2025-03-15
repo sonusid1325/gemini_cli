@@ -14,5 +14,4 @@ fi
 echo "Installing $SOURCE_FILE to $DEST_DIR..."
 sudo cp "$SOURCE_FILE" "$DEST_DIR"
 
-
 echo "Installation complete."

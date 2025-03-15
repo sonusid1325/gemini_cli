@@ -19,7 +19,11 @@ func main() {
 		log.Fatal("GEMINI_API_KEY not set in .env")
 	}
 
-	for {
-		cli.Init(apiKey)
+	args := os.Args[1:]
+
+	if len(args) == 0 {
+		for {
+			cli.Init(apiKey)
+		}
 	}
 }
