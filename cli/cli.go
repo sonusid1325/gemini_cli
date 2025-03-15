@@ -52,14 +52,25 @@ func Init(apiKey string) {
 	}
 
 	generatedText := response.Candidates[0].Content.Parts[0].Text
+	lines := strings.Split(generatedText, "\n")
+
+	if len(lines) > 0 {
+		lines = lines[:len(lines)-1]
+	}
+
+	trimmedGeneratedText := strings.Join(lines, "\n")
 
 	style := lipgloss.NewStyle().
 		BorderStyle(lipgloss.RoundedBorder()).
-		BorderForeground(lipgloss.Color("63")).
+		BorderForeground(lipgloss.Color("#FF69B4")).
 		Padding(1, 2).
 		Width(width / 2)
 
-	output := fmt.Sprintf("Gemini:\n%s", generatedText)
+	fmt.Print("Thinking...\n")
+
+	textStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("#7571f9"))
+
+	output := fmt.Sprintf("%s\n%s", textStyle.Render("Gemini:"), trimmedGeneratedText)
 	borderedOutput := style.Render(output)
 
 	fmt.Println(borderedOutput)
