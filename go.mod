@@ -5,6 +5,7 @@ go 1.24.1
 require (
 	github.com/charmbracelet/huh v0.6.0
 	github.com/charmbracelet/lipgloss v1.0.0
+	github.com/joho/godotenv v1.5.1
 	golang.org/x/term v0.30.0
 )
 
