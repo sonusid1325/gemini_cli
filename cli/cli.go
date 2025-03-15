@@ -55,8 +55,6 @@ func Init(apiKey string) {
 
 	trimmedGeneratedText := strings.Join(lines, "\n")
 
-	fmt.Print("Thinking...\n")
-
 	textStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("#7571f9"))
 
 	renderedOutput, err := glamour.Render(trimmedGeneratedText, "dark")
@@ -64,6 +62,15 @@ func Init(apiKey string) {
 	if err != nil {
 		log.Fatal("Error rendering output with glamour:", err)
 	}
-	fmt.Println(textStyle.Render("gemini :"))
-	fmt.Println(renderedOutput)
+	outputLines := strings.Split(renderedOutput, "\n")
+
+	if len(outputLines) > 2 {
+		outputLines = outputLines[:len(outputLines)-1]
+	}
+
+	trimmedRenderedOutput := strings.Join(outputLines, "\n")
+
+	fmt.Println(textStyle.Render("Gemini :"))
+
+	fmt.Println(trimmedRenderedOutput)
 }

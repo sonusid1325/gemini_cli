@@ -7,7 +7,7 @@ require (
 	github.com/charmbracelet/huh v0.6.0
 	github.com/charmbracelet/lipgloss v1.1.0
 	github.com/joho/godotenv v1.5.1
-	golang.org/x/term v0.30.0
+	golang.org/x/term v0.30.0 // indirect
 )
 
 require (
