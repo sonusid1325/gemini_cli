@@ -9,9 +9,9 @@ import (
 
 	"gemini/ai"
 
+	"github.com/charmbracelet/glamour"
 	"github.com/charmbracelet/huh"
 	"github.com/charmbracelet/lipgloss"
-	"golang.org/x/term"
 )
 
 func Init(apiKey string) {
@@ -35,11 +35,6 @@ func Init(apiKey string) {
 		os.Exit(0)
 	}
 
-	width, _, err := term.GetSize(int(os.Stdout.Fd()))
-	if err != nil {
-		log.Println("Error getting terminal size:", err)
-		width = 80
-	}
 	ctx := context.Background()
 
 	response, err := ai.GenerateContent(ctx, apiKey, text)
@@ -60,18 +55,15 @@ func Init(apiKey string) {
 
 	trimmedGeneratedText := strings.Join(lines, "\n")
 
-	style := lipgloss.NewStyle().
-		BorderStyle(lipgloss.RoundedBorder()).
-		BorderForeground(lipgloss.Color("#FF69B4")).
-		Padding(1, 2).
-		Width(width / 2)
-
 	fmt.Print("Thinking...\n")
 
 	textStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("#7571f9"))
 
-	output := fmt.Sprintf("%s\n%s", textStyle.Render("Gemini:"), trimmedGeneratedText)
-	borderedOutput := style.Render(output)
+	renderedOutput, err := glamour.Render(trimmedGeneratedText, "dark")
 
-	fmt.Println(borderedOutput)
+	if err != nil {
+		log.Fatal("Error rendering output with glamour:", err)
+	}
+	fmt.Println(textStyle.Render("gemini :"))
+	fmt.Println(renderedOutput)
 }
