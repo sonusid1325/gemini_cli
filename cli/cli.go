@@ -15,6 +15,7 @@ import (
 )
 
 func Init(apiKey string) {
+	textStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("#7571f9"))
 	var text string
 
 	form := huh.NewForm(
@@ -37,6 +38,8 @@ func Init(apiKey string) {
 
 	ctx := context.Background()
 
+	fmt.Println(textStyle.Render("Gemini Response :"))
+
 	response, err := ai.GenerateContent(ctx, apiKey, text)
 	if err != nil {
 		log.Fatal("Error generating content:", err)
@@ -55,8 +58,6 @@ func Init(apiKey string) {
 
 	trimmedGeneratedText := strings.Join(lines, "\n")
 
-	textStyle := lipgloss.NewStyle().Foreground(lipgloss.Color("#7571f9"))
-
 	renderedOutput, err := glamour.Render(trimmedGeneratedText, "dark")
 
 	if err != nil {
@@ -69,8 +70,6 @@ func Init(apiKey string) {
 	}
 
 	trimmedRenderedOutput := strings.Join(outputLines, "\n")
-
-	fmt.Println(textStyle.Render("response"))
 
 	borderedOutput := lipgloss.NewStyle().
 		Border(lipgloss.NormalBorder(), true, false, true, false).
