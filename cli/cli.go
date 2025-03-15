@@ -57,7 +57,7 @@ func Init(apiKey string) {
 		BorderStyle(lipgloss.RoundedBorder()).
 		BorderForeground(lipgloss.Color("63")).
 		Padding(1, 2).
-		Width(width - 4)
+		Width(width / 2)
 
 	output := fmt.Sprintf("Gemini:\n%s", generatedText)
 	borderedOutput := style.Render(output)
