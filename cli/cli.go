@@ -70,7 +70,12 @@ func Init(apiKey string) {
 
 	trimmedRenderedOutput := strings.Join(outputLines, "\n")
 
-	fmt.Println(textStyle.Render("Gemini :"))
+	fmt.Println(textStyle.Render("response"))
 
-	fmt.Println(trimmedRenderedOutput)
+	borderedOutput := lipgloss.NewStyle().
+		Border(lipgloss.NormalBorder(), true, false, true, false).
+		BorderForeground(lipgloss.Color("#ff85b8")).
+		Render(trimmedRenderedOutput)
+
+	fmt.Println(borderedOutput)
 }
